@@ -1,0 +1,8 @@
+version: "3"
+services:
+  z-portal:
+    image: dok8/z-portal-assignment-final-alpine:2.0
+    container_name: z-portal-app
+    ports:
+      - "4001:4001"
+    restart: always
