@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HOME</title>
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="alert alert-primary mt-3 text-center">
+            All Data
+            <form class="form-inline">
+                <input type="text" id="searchInput" class="form-control" placeholder="Search by Name...">
+            </form>
+        </div>
+
+        <div class="toggle custom-control custom-switch" style="margin-left: 40px;">
+            <input type="checkbox" id="toggleEmail" class="hidden-checkbox" />
+            <label for="toggleEmail" class="toggle-label">
+                <div class="slider"></div>
+            </label>
+        </div>
+
+        <div class="container">
+            <% if (totalPages> 1) { %>
+                <ul class="pagination">
+                    <% if (page> 1) { %>
+                        <li class="page-item">
+                            <a class="page-link" href="?page=<%= page - 1 %>">Previous</a>
+                        </li>
+                        <% } %>
+
+                            <% for (let i=1; i <=totalPages; i++) { %>
+                                <% if (i===1 || i===totalPages || (i>= page - 2 && i <= page + 2)) { %>
+                                        <li class="page-item <%= i === page ? 'active' : '' %>">
+                                            <a class="page-link" href="?page=<%= i %>">
+                                                <%= i %>
+                                            </a>
+                                        </li>
+                                        <% } else if (i===page - 3 || i===page + 3) { %>
+                                            <li class="page-item disabled">
+                                                <span class="page-link">...</span>
+                                            </li>
+                                            <% } %>
+                                                <% } %>
+
+                                                    <% if (page < totalPages) { %>
+                                                        <li class="page-item">
+                                                            <a class="page-link" href="?page=<%= page + 1 %>">Next</a>
+                                                        </li>
+                                                        <% } %>
+                </ul>
+                <% } %>
+        </div>
+
+        <!-- Table to display user data -->
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">First Name</th>
+                    <th scope="col">Last Name</th>
+                    <th scope="col" style="width: 300px;">Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% users.forEach(function(user, index) { %>
+                    <tr>
+                        <th scope="row">
+                            <%= index + 1 %>
+                        </th>
+                        <td>
+                            <%= user.first_name %>
+                        </td>
+                        <td>
+                            <%= user.last_name %>
+                        </td>
+                        <td class="masked-email" data-email="<%= user.email %>">
+                            <%= maskEmail(user.email) %>
+                        </td>
+                    </tr>
+                    <% }); %>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="container">
+        <div class="alert alert-info mt-3 text-center">Only First Name "G", Last Name "W"
+        </div>
+        <!-- Table to display user data for a criteria-->
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">First Name</th>
+                    <th scope="col">Last Name</th>
+                    <th scope="col" style="width: 300px;">Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% users2.forEach(function(user, index) { %>
+                    <tr>
+                        <th scope="row">
+                            <%= index + 1 %>
+                        </th>
+                        <td>
+                            <%= user.first_name %>
+                        </td>
+                        <td>
+                            <%= user.last_name %>
+                        </td>
+                        <td class="masked-email" data-email="<%= user.email %>">
+                            <%= maskEmail(user.email) %>
+                        </td>
+                    </tr>
+                    <% }); %>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        const emailCells = document.querySelectorAll('.masked-email');
+        const toggleEmailCheckbox = document.getElementById('toggleEmail');
+        let emailMasked = true;
+
+        toggleEmailCheckbox.addEventListener('change', () => {
+            emailMasked = !emailMasked;
+
+            emailCells.forEach(cell => {
+                const actualEmail = cell.getAttribute('data-email');
+                cell.textContent = emailMasked ? '******' : actualEmail;
+            });
+        });
+
+        // Select the search input field
+        const searchInput = document.getElementById('searchInput');
+
+        // Function to filter table rows based on the search query
+        function filterTable() {
+            const query = searchInput.value.toLowerCase();
+            const tableRows = document.querySelectorAll('.table tbody tr');
+
+            tableRows.forEach(row => {
+                const rowData = row.textContent.toLowerCase();
+                if (rowData.includes(query)) {
+                    row.style.display = 'table-row';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        }
+        searchInput.addEventListener('input', filterTable);
+    </script>
+</body>
+
+</html>

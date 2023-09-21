@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HOME</title>
+    <link rel="stylesheet" href="/css/header.css" />
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+</head>
+
+<body>
+    <!-- //Header Dynamic -->
+    <%- include('header.ejs') %>
+        <!-- //Content Dynamic -->
+
+        <!-- Loading component -->
+        <div id="loadingComponent" class="text-center"
+            style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+            <p>Loading data...</p>
+            <a class="navbar-brand" href="#">
+                <img src="/images/XVo6.gif" width="200px" height="100px" alt="" />
+            </a>
+        </div>
+
+
+        <div id="content" style="display: none">
+            <%- include('main.ejs') %>
+        </div>
+
+        <!-- //Footer Dynamic -->
+        <%- include('footer.ejs') %>
+</body>
+
+<script>
+    // Hide loading component and show content after a 3-second delay, to mimic delay in data load
+    setTimeout(() => {
+        const loadingComponent = document.getElementById("loadingComponent");
+        const content = document.getElementById("content");
+        loadingComponent.style.display = "none";
+        content.style.display = "block";
+    }, 1000); // 3000 milliseconds (3 seconds) delay
+</script>
+
+</html>
