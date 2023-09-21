@@ -5,7 +5,7 @@
 1. Download this code in your local.
 2. Unzip it
 3. Open in VSCode
-4. You need to create `.env` file in your download project in this project and paste the below details for Google Oauth
+4. Please check whether `.env` file is present or not if not present then, You need to create `.env` file in your download project in this project and paste the below details for Google Oauth
    - GOOGLE_CLIENT_ID="557963300759-lpik0h0gm84o1i97ad5t7pltjubhp1e9.apps.googleusercontent.com"
    - GOOGLE_CLIENT_SECRET="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"
    - GOOGLE_CALLBACK_URL="http://localhost:4001/auth/google/callback"
