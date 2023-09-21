@@ -8,6 +8,8 @@
 4. You need to create `.env` file in your download project in this project and paste the below details for Google Oauth
    - GOOGLE_CLIENT_ID="557963300759-lpik0h0gm84o1i97ad5t7pltjubhp1e9.apps.googleusercontent.com"
    - GOOGLE_CLIENT_SECRET="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"
+   - GOOGLE_CALLBACK_URL="http://localhost:4001/auth/google/callback"
+   - SESSION_SECRET="this_is_my_802fe9f8-6974-41bd-8bb6-47f0139bdc17"
 5. Then you can run: `npm install`
 6. Then run: `npm run dev`
 7. Open in `http://localhost:4001/login`
