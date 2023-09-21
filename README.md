@@ -14,7 +14,7 @@
 6. Then run: `npm run dev`
 7. Open in `http://localhost:4001/login`
 
-## B. :2nd_place_medal: Using Dockerfile images -- No Setup, only need Docker in your machine :grin: :heart_eyes: :100:
+## B. :2nd_place_medal: Using Docker Hub images -- No Setup, only need Docker in your machine :grin: :heart_eyes: :100:
 
 1. If your machine has docker, then its very easy :grin:
 2. Open Command Line/Terminal, run : `docker --version`
